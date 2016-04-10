@@ -12,9 +12,9 @@ class TodoList
   	@title = title
   end
 
-  def add_item(new_item)
+  def add_item(category, description)
   	# add an item
-  	item = Item.new(new_item)
+  	item = Item.new(category, description)
   	@items.push(item)
   end
 
@@ -23,48 +23,65 @@ class TodoList
   	return @items.delete_at(index)
   end
 
-  def print(include_header=true)
+  def print(sort_by_category=true, include_header=true)
   	# returns a string that can be puts or exported to a file
   	# optionally includes header
   	result = ""
-
   	result += get_header if include_header
+  	items = @items
 
-  	for item in @items do
+  	if sort_by_category
+  		# sorty by category
+  		items = items.sort{ |a, b| a.category <=> b.category }
+  	end
+
+  	# sort by status, with incomplete items sorted at the top
+  	items = items.sort_by { |item| item.completed_status ? 0 : 1 }
+
+  	# print out the unfinished items
+  	for item in items do
   		result += item.print
   	end
-  	
+
   	return result + "\n"
-  
   end
 
   def to_s
   	# makes it easy to print the list, merely by 'puts list' command
-  	self.print
+  	return self.print
   end
 
   def get_header(char = "-", num = 4)
   	# char is a string
   	# num is an integer
   	# char and num are character settings for the header that flank the title
-  	return line_break(char, num) + "  " + @title + "  " + line_break(char, num) + "\n"
+  	result = line_break(char, num) + "  " + @title + "  " + line_break(char, num) + "\n"
+  	result += "STATUS\tCATEGORY\tDESCRIPTION\n"
   end
 
 end
 
 class Item
 
-		attr_reader :description, :completed_status
+		attr_reader :description, :completed_status, :category, :priority
 		
     # methods and stuff go here
-    def initialize(description)
+    def initialize(category, description)
+    	# category (string), designed for grouping items by category
+    	# description (string)
     	@description = description
     	@completed_status = false
+    	@priority = false
+    	@category = category
     end
 
     def update_status
     	# toggles the status between true/false
     	@completed_status = !@completed_status	
+    end
+
+    def update_priority
+    	@priority = !@priority
     end
 
     def to_s
@@ -76,8 +93,9 @@ class Item
     	# designed for printing item to a list
     	status = "ToDo"
   		status = "Done" if @completed_status
+  		priority = " !!!" if @priority
     	result = ''
-    	result += "#{status}\t#{@description}\n"
+    	result += "#{status}\t\t#{@category}\t\t#{@description}#{priority}\n"
     end
 
 end
