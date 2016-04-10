@@ -1,0 +1,17 @@
+commit a7d5466a241048e37dcb169436e8df711e390cea
+Author: PK Banks <pkbanks@gmail.com>
+Date:   Sun Apr 10 15:38:54 2016 -0400
+
+    finished adding 3 new features: priority, category, and sort by completed_status.  moving on to final steps before submission
+
+commit 616b243d1d02a1a94f948ab32c858aa09a924aed
+Author: PK Banks <pkbanks@gmail.com>
+Date:   Sun Apr 10 13:24:15 2016 -0400
+
+    finished basic parameters of the problem set.  now moving on to supplemental features.
+
+commit 598747701f30c6994732a70c73289541f2c67741
+Author: PK Banks <pkbanks@gmail.com>
+Date:   Sat Apr 9 14:44:50 2016 -0400
+
+    initial init and commit
