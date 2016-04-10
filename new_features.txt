@@ -1,0 +1,18 @@
+Feature #1: Item.priority property
+	type boolean
+
+	meant to indicate significantly greater importance than the other items
+	
+	if true, then the item's print out will have '!!!' appended to the description, placing visual emphasis to that item
+
+Feature #2: Item.category property
+	type string
+	
+	allows for items to be grouped by category
+	
+	for example, imagine we have personal tasks and work tasks.  assigning these tasks common categories allows us to group and sort them as such
+
+	by default, the printout of the list is grouped and sorted by category
+
+Feature #3: Sort by completed_status
+	when printing the to do list, we float the open items to the top and push the completed items to the bottom
