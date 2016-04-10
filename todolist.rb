@@ -63,40 +63,44 @@ end
 
 class Item
 
-		attr_reader :description, :completed_status, :category, :priority
-		
-    # methods and stuff go here
-    def initialize(category, description)
-    	# category (string), designed for grouping items by category
-    	# description (string)
-    	@description = description
-    	@completed_status = false
-    	@priority = false
-    	@category = category
-    end
+	attr_reader :description, :completed_status, :category, :priority
+	
+  # methods and stuff go here
+  def initialize(category, description)
+  	# category (string), designed for grouping items by category
+  	# description (string)
+  	@description = description
+  	@completed_status = false
+  	@priority = false
+  	@category = category
+  end
 
-    def update_status
-    	# toggles the status between true/false
-    	@completed_status = !@completed_status	
-    end
+  def update_status
+  	# toggles the status between true/false
+  	@completed_status = !@completed_status	
+  end
 
-    def update_priority
-    	@priority = !@priority
-    end
+  def update_priority
+  	@priority = !@priority
+  end
 
-    def to_s
-    	@description
-    end
+  def is_priority?
+  	return @priority
+  end
 
-    def print
-    	# returns a string
-    	# designed for printing item to a list
-    	status = "ToDo"
-  		status = "Done" if @completed_status
-  		priority = " !!!" if @priority
-    	result = ''
-    	result += "#{status}\t\t#{@category}\t\t#{@description}#{priority}\n"
-    end
+  def to_s
+  	@description
+  end
+
+  def print
+  	# returns a string
+  	# designed for printing item to a list
+  	status = "ToDo"
+		status = "Done" if @completed_status
+		priority = " !!!" if is_priority?
+  	result = ''
+  	result += "#{status}\t\t#{@category}\t\t#{@description}#{priority}\n"
+  end
 
 end
 
